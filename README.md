@@ -1,25 +1,144 @@
-# Smarter.Codes Scrapping URL
 
-**Instructions for setting up and running the project locally.**
+# Scrapping-URL
 
-1 -  Clone the project into your local - git clone https://github.com/pratap-rahul15/Scrapping-URL.git
+A full-stack web application that allows users to input a website URL and a query then returns the top 10 most relevant HTML content chunks using semantic search powered by embeddings and a vector database.
+---
 
-2 -  After cloning, there will be 2 main folders **client(frontend)** and **server(backend)**
+## 🚀 Overview
 
-3 - Before installing 
+This application performs real-time:
+- Web scraping from the provided URL
+- Text chunking and embedding using sentence-transformers
+- Semantic search via a vector database (Weaviate)
+- Ranks and displays the most relevant HTML sections for the user’s query
 
-   ***Prerequisite***
-   ---
-   - Install the dependencies to run the front-end -> client folder
-     
-   - To install it, open your terminal and run the command - **npm install**, it will install all the necessary libraries & dependencies mentioned in the **package.json**
+---
 
-   - To run the front end use the command - **npm run dev**, the server will start locally -  http://localhost:5173/
 
-   - Now, install the dependencies to run the back-end -> server folder
+## ✅ Prerequisites
 
-   - To install it, open your terminal and run the command— **pip install—r requirements.txt**. This will install all the necessary libraries and dependencies mentioned in the **requirements.txt** file.
+Install the following before setup:
 
-   - Before running the back end, start the docker as I have installed the vector database *Weaviate* on the *Docker compose*, spin it up using the - **docker-compose -f weaviate-client.yml up --build -d**
+- **[Node.js](https://nodejs.org/)** (v16+)
+- **[Python 3.9+](https://www.python.org/)**
+- **[Docker](https://www.docker.com/)** (for vector DB)
+- **pip** and **virtualenv** (Python tools)
 
-   - When you docker spins-up start the backend, as I have used the python *FAST API* for the back-end so to run it use the command - **uvicorn app.main:app --reload**
+---
+
+## ⚙️ Setup & Run Locally
+
+### 🔹 Frontend (React + Vite)
+
+```bash
+cd client
+npm install
+npm run dev
+
+Visit the app at: http://localhost:5173
+```
+
+
+### 🐳 Start Vector Database (Weaviate)
+
+Before running the backend, you need to start the vector database.
+
+This project uses **Weaviate**, set up via Docker Compose.
+
+Spin it up using the following command:
+
+```
+docker-compose -f weaviate-client.yml up --build -d
+
+
+### 🔸 Backend (FastAPI)
+
+cd server
+python -m venv venv
+source venv/bin/activate     
+pip install -r requirements.txt
+
+```
+
+### Run the FastAPI server:
+
+```
+uvicorn main:app --reload --port 8000
+```
+
+### 📍 API will be live at:
+```
+http://localhost:8000
+
+```
+
+###  🔬 You can also explore and test the endpoints using FastAPI's built-in Swagger UI:
+```
+http://localhost:8000/docs
+
+```
+
+###  🛠 Technologies Used
+
+```
+Frontend
+
+React.js
+
+Vite
+
+Tailwind CSS
+
+Axios
+
+-----------------
+
+Backend
+
+FastAPI
+
+BeautifulSoup
+
+SentenceTransformers
+
+Weaviate (vector DB)
+
+Uvicorn (ASGI server)
+
+```
+
+### 📸 Usage Flow
+
+-  Open: http://localhost:5173
+
+-  Enter a public website URL
+
+-  Enter your search query
+
+-  See top 10 relevant content chunks instantly!
+
+  ### 🧠 Core Logic
+🔍 Step-by-Step Flow 
+- Scraping:
+
+  Uses requests and BeautifulSoup to parse the page content 
+
+- Chunking:
+
+  HTML text is split into logical text chunks using custom   token-based logic.
+
+- Embedding:
+
+Each chunk is converted to a vector using sentence-transformers.
+
+- Vector DB Insertion:
+
+Chunks are stored in Weaviate as embeddings.
+
+-  Semantic Search:
+
+Query is embedded and matched against stored vectors to find   top 10 results.
+
+- Response:
+
+The 10 most relevant chunks are sent back and rendered in the frontend.
