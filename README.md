@@ -142,3 +142,6 @@ Query is embedded and matched against stored vectors to find   top 10 results.
 - Response:
 
 The 10 most relevant chunks are sent back and rendered in the frontend.
+
+![Screenshot (223)](https://github.com/user-attachments/assets/68995a96-9dbf-4744-83ed-5e8f2b223cd1)
+
